@@ -54,6 +54,11 @@ pre {
 *:focus {
     outline: none;
 }
+.bright {
+  color: oklch(100% 0.15 350.57) !important;
+  font-weight: 900;
+  transition: color 0.1s;
+}
 
 
 
@@ -71,9 +76,8 @@ onMounted(() => {
   let args = []
   const history = document.querySelector('.history')
 
-
   function returnText(text) {
-    history.innerHTML += `<p><pre>${text}</pre></p>`
+    history.innerHTML += `<p><pre class='lasthistory'>${text}</pre></p>`
   }
 
 
@@ -84,14 +88,13 @@ onMounted(() => {
   }
 
   function help() {
-    console.log('help given')
     for (const [key, value] of Object.entries(commands)) {
       returnText(key+" : "+value[1]);
       if (options[1] == '-m') {
         returnText('Args : '+value[2])
       }
     }
-    returnText(`<p><pre>✨ Hint : Use -m to have more details about args and options ✨</pre></p>`)
+    returnText(`✨ Hint : Use -m to have more details about args and options `)
   }
 
   // Welcome message
@@ -113,19 +116,25 @@ onMounted(() => {
 
   ascii.forEach(element => {
     console.log(element)
-    returnText(`<p><pre>${element}</pre></p>`)
+    returnText(`${element}`)
   });
-  returnText(`<p><pre> </pre></p>`)
-  returnText(`<p><pre>Welcome to Spectralo's TUI website</pre></p>`)
-  returnText(`<p><pre>Type 'help' to get some hints ✨ </pre></p>`)
+  returnText(` `)
+  returnText(`Welcome to Spectralo's TUI website`)
+  returnText(`Type 'help' to get some hints ✨`)
 
   line.value.focus()
   line.value.addEventListener('keydown', (e) => {
     
     if (e.key === 'Enter') {
+      
       // Add the command to the history
       e.preventDefault()
       const input = line.value.innerText
+      const prompt = document.querySelector('.prompt')
+      prompt.classList.add('bright')
+      setTimeout(() => {
+        prompt.classList.remove('bright')
+      }, 200)
       
       // Reset input line
       line.value.innerText = ''
@@ -141,7 +150,6 @@ onMounted(() => {
 
       breakedInputWithoutCommand.forEach(element => {
         let elementArray = element.split('')
-        console.log(elementArray)
         if (elementArray[0] == '-') {
           options.push(element)
         }
@@ -150,22 +158,16 @@ onMounted(() => {
         }
       });
 
-      console.log(command)
-      console.log(args)
-      console.log(options)
-
-      const history = document.querySelector('.history')
       history.innerHTML += `<p>[${path}] ${input}</p>`
-
       // Add output to the history
       if (commands[command][4] < args.length) {
-        returnText(`<p><pre> Too much args :/</pre></p>`)
+        returnText(`Too much args :/`)
       } else if (commands[command][5] < options.length) {
-        returnText(`<p><pre> Too much options :/</pre></p>`)
+        returnText(`Too much options :/`)
       } else if (command in commands) {
         commands[command][0]()
       } else {
-        returnText(`<p><pre>Command not found</pre></p>`)
+        returnText(`Command not found`)
       }
 
       
