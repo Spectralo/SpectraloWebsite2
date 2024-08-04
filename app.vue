@@ -137,14 +137,16 @@ onMounted(() => {
       // Break down the command to use it 
       let breakedInput = input.split(' ')
       let command = breakedInput[0]
-      args = breakedInput.slice(1)
+      let breakedInputWithoutCommand = breakedInput.slice(1)
 
-      args.forEach(element => {
+      breakedInputWithoutCommand.forEach(element => {
         let elementArray = element.split('')
         console.log(elementArray)
         if (elementArray[0] == '-') {
           options.push(element)
-          args.splice(args.indexOf(element), 1)
+        }
+        else {
+          args.push(element)
         }
       });
 
