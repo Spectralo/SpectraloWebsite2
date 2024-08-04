@@ -2,7 +2,7 @@
   <div class="terminalcontainer">
     <p class="history" ref="history"></p>
     <div class="editable">
-      <p class="prompt">[{{ path }}] </p>
+      <p class="prompt">[{{ path }}]</p>
       <div class="line"  ref="line" contenteditable="true"></div>
     </div>
     
@@ -24,10 +24,9 @@ body {
   margin-bottom: 5%;
   margin-left: 5%;
   margin-right: 5%; 
-  width: 100%;
+  width: 90vw;
   word-wrap: break-word;
   white-space: pre-wrap;
-
 }
 
 pre {
@@ -52,7 +51,6 @@ pre {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  width: 100%;
   margin: 0;
   margin-left: 0.5em;
 }
@@ -62,6 +60,42 @@ pre {
 .glowing {
   color: oklch(80.15% 0.15 320.57);
 }
+
+@keyframes horizontal-shaking {
+ 0% { transform: translateX(0) }
+ 25% { transform: translateX(5px) }
+ 50% { transform: translateX(-5px) }
+ 75% { transform: translateX(5px) }
+ 100% { transform: translateX(0) }
+}
+
+@keyframes cool-done {
+  0% { transform: rotate(0) }
+  50% { transform: rotate(-10) }
+  100% { transform: rotate(0) }
+}
+
+@keyframes appear {
+  0% { opacity: 0 }
+  100% { opacity: 1 }
+}
+
+.shaking {
+  animation: horizontal-shaking 0.5s;
+}
+
+.cool {
+  animation: cool-done 0.5s;
+}
+
+.output {
+  color: oklch(80.15% 0.15 50);
+}
+
+.appearoutput {
+  animation: appear 0.5s;
+}
+
 
 
 
@@ -83,37 +117,55 @@ onMounted(() => {
     history.innerHTML += `<p><pre class='${textclass}'>${text}</pre></p>`
   }
 
+  function returnOutput(text) {
+    history.innerHTML += `<p><pre class='output'>${text}</pre></p>`
+    let lasthistory = history.lastChild
+    lasthistory.classList.add('appearoutput')
+    setTimeout(() => {
+      lasthistory.classList.remove('appearoutput')
+    }, 500)
+  }
+
 
   // Define commands
 
   let commands = {
-    'help' : [help, 'Give you some hints', '1, Command name (optional)','-m : More details',1,1],
+    'help' : [help, 'Give you some hints', '1, Command name (optional)','-m, More details',1,1],
     'clear' : [clear, 'Clear the terminal', '0','0',0,0],
     'contact' : [contact, 'Contact me', '0','0',0,0],
     'aboutme' : [aboutme, 'About me', '0','0',0,0],
+    'ascii' : [asciiprint, 'Print a beautiful image', '0','0',0,0],
+    'blog' : [blog, 'Go to my blog', '0','0',0,0],
   }
 
   function help() {
     for (const [key, value] of Object.entries(commands)) {
-      returnText(key+" : "+value[1]);
-      if (options[1] == '-m') {
-        returnText('Args : '+value[2])
+      returnOutput(key+" : "+value[1]);
+      if (options[0] == '-m') {
+        returnOutput('Args : '+value[2])
+        returnOutput('Options : '+value[3])
+        returnOutput('=========================')
       }
     }
-    returnText(`✨ Hint : Use -m to have more details about args and options `)
+    returnOutput(`✨ Hint : Use -m to have more details about args and options `)
   }
 
   function clear() {
     history.innerHTML = ''
   }
 
+  function blog() {
+    navigateTo('/blog')
+  }
   function contact() {
-    returnText('How to contact me :')
-    returnText('  By email at arthur@spectralo.me')
-    returnText('  On dicord at @spectralo_')
+    returnOutput('How to contact me :')
+    returnOutput('  By email at arthur@spectralo.me')
+    returnOutput('  On dicord at @spectralo_')
   }
   function aboutme() {
-    returnText('I am a 14 developer from France, I like doing all kind of stuff, from web development to game development, emnbedded systems and more ! On this website you can find some of my work and some of my thoughts.')
+    returnOutput('I am a 14 developer from France, I like doing all kind of stuff, ')
+    returnOutput('from web development to game development, emnbedded systems and more !')
+    returnOutput('On this website you can find some of my work and some of my thoughts.')
   }
 
   // Welcome message
@@ -132,11 +184,14 @@ onMounted(() => {
     "    %%////////*//**////////    ",
     "      ////**//*%%//**////      "
   ]
-
-  ascii.forEach(element => {
-    console.log(element)
-    returnText(`${element}`,"glowing")
-  });
+  function asciiprint() {
+    ascii.forEach(element => {
+      console.log(element)
+      returnText(`${element}`,"glowing")
+    });
+  }
+  
+  asciiprint()
   returnText(` `)
   returnText(`Welcome to Spectralo's TUI website`)
   returnText(`Type 'help' to get some hints ✨`)
@@ -145,7 +200,11 @@ onMounted(() => {
   line.value.addEventListener('keydown', (e) => {
     
     if (e.key === 'Enter') {
+      window.scrollTo(0, document.body.scrollHeight);
+
+      const container = document.getElementsByClassName('terminalcontainer')[0]
       
+
       // Add the command to the history
       e.preventDefault()
       const input = line.value.innerText
@@ -185,10 +244,22 @@ onMounted(() => {
         } else if (commands[command][5] < options.length) {
           returnText(`Too much options :/`)
         } else {
-        commands[command][0]()
+          container.classList.add('cool')
+          setTimeout(() => {
+            container.classList.remove('cool')
+          }, 500)
+          commands[command][0]()
         }
       } else {
-        returnText(`Command not found`)
+        if (command == '') {
+          console.log('empty')
+        } else {
+          returnText(`Command not found`)
+          container.classList.add('shaking')
+          setTimeout(() => {
+            container.classList.remove('shaking')
+          }, 500)
+        }
       }
     }
   })
