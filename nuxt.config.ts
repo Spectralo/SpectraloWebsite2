@@ -7,7 +7,7 @@ export default defineNuxtConfig({
       { 
         families: { 
           Roboto: [400, 700, 900],
-          "JetBrains Mono": [500, 700]
+          "JetBrains Mono": [500, 700, 800]
 
         } 
       }  

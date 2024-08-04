@@ -24,16 +24,21 @@ body {
   margin-bottom: 5%;
   margin-left: 5%;
   margin-right: 5%; 
+  width: 100%;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+
 }
 
 pre {
   font-family: JetBrains Mono, monospace ;
   font-size: 30px;
-  color: oklch(80.15% 0.15 320.57);
+  color: oklch(80.15% 0.15 100);
 }
 
 .terminalcontainer {
-  color: oklch(80.15% 0.15 320.57);
+  color: oklch(80.15% 0.15 100);
+
 }
 .editable {
   display: flex;
@@ -54,10 +59,8 @@ pre {
 *:focus {
     outline: none;
 }
-.bright {
-  color: oklch(100% 0.15 350.57) !important;
-  font-weight: 900;
-  transition: color 0.1s;
+.glowing {
+  color: oklch(80.15% 0.15 320.57);
 }
 
 
@@ -76,8 +79,8 @@ onMounted(() => {
   let args = []
   const history = document.querySelector('.history')
 
-  function returnText(text) {
-    history.innerHTML += `<p><pre class='lasthistory'>${text}</pre></p>`
+  function returnText(text, textclass = "nevergonnagiveyouup") {
+    history.innerHTML += `<p><pre class='${textclass}'>${text}</pre></p>`
   }
 
 
@@ -85,6 +88,9 @@ onMounted(() => {
 
   let commands = {
     'help' : [help, 'Give you some hints', '1, Command name (optional)','-m : More details',1,1],
+    'clear' : [clear, 'Clear the terminal', '0','0',0,0],
+    'contact' : [contact, 'Contact me', '0','0',0,0],
+    'aboutme' : [aboutme, 'About me', '0','0',0,0],
   }
 
   function help() {
@@ -95,6 +101,19 @@ onMounted(() => {
       }
     }
     returnText(`✨ Hint : Use -m to have more details about args and options `)
+  }
+
+  function clear() {
+    history.innerHTML = ''
+  }
+
+  function contact() {
+    returnText('How to contact me :')
+    returnText('  By email at arthur@spectralo.me')
+    returnText('  On dicord at @spectralo_')
+  }
+  function aboutme() {
+    returnText('I am a 14 developer from France, I like doing all kind of stuff, from web development to game development, emnbedded systems and more ! On this website you can find some of my work and some of my thoughts.')
   }
 
   // Welcome message
@@ -116,7 +135,7 @@ onMounted(() => {
 
   ascii.forEach(element => {
     console.log(element)
-    returnText(`${element}`)
+    returnText(`${element}`,"glowing")
   });
   returnText(` `)
   returnText(`Welcome to Spectralo's TUI website`)
@@ -160,17 +179,17 @@ onMounted(() => {
 
       history.innerHTML += `<p>[${path}] ${input}</p>`
       // Add output to the history
-      if (commands[command][4] < args.length) {
-        returnText(`Too much args :/`)
-      } else if (commands[command][5] < options.length) {
-        returnText(`Too much options :/`)
-      } else if (command in commands) {
+      if (command in commands) {
+        if (commands[command][4] < args.length) {
+          returnText(`Too much args :/`)
+        } else if (commands[command][5] < options.length) {
+          returnText(`Too much options :/`)
+        } else {
         commands[command][0]()
+        }
       } else {
         returnText(`Command not found`)
       }
-
-      
     }
   })
 })
