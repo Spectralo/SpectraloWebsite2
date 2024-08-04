@@ -65,7 +65,10 @@ import { ref, onMounted } from 'vue'
 const line = ref(null)
 
 
+
 onMounted(() => {
+  let options = []
+  let args = []
   const history = document.querySelector('.history')
 
 
@@ -77,7 +80,18 @@ onMounted(() => {
   // Define commands
 
   let commands = {
-    'help' : [help, 'Give you some hints', '1 : Command name (optional)'],
+    'help' : [help, 'Give you some hints', '1, Command name (optional)','-m : More details',1,1],
+  }
+
+  function help() {
+    console.log('help given')
+    for (const [key, value] of Object.entries(commands)) {
+      returnText(key+" : "+value[1]);
+      if (options[1] == '-m') {
+        returnText('Args : '+value[2])
+      }
+    }
+    returnText(`<p><pre>✨ Hint : Use -m to have more details about args and options ✨</pre></p>`)
   }
 
   // Welcome message
@@ -116,14 +130,18 @@ onMounted(() => {
       // Reset input line
       line.value.innerText = ''
 
+      // Reset options and args
+      options = []
+      args = []
+
       // Break down the command to use it 
       let breakedInput = input.split(' ')
       let command = breakedInput[0]
-      let args = breakedInput.slice(1)
-      let options = []
+      args = breakedInput.slice(1)
 
       args.forEach(element => {
         let elementArray = element.split('')
+        console.log(elementArray)
         if (elementArray[0] == '-') {
           options.push(element)
           args.splice(args.indexOf(element), 1)
@@ -138,13 +156,17 @@ onMounted(() => {
       history.innerHTML += `<p>[${path}] ${input}</p>`
 
       // Add output to the history
-      if (input === '') {
-        history.innerHTML += `<p></p>`
-      } else if (input === 'rm -rf /') {
-        window.location.href = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
+      if (commands[command][4] < args.length) {
+        returnText(`<p><pre> Too much args :/</pre></p>`)
+      } else if (commands[command][5] < options.length) {
+        returnText(`<p><pre> Too much options :/</pre></p>`)
+      } else if (command in commands) {
+        commands[command][0]()
       } else {
-        history.innerHTML += `<p>Command not found: ${input}</p>`
+        returnText(`<p><pre>Command not found</pre></p>`)
       }
+
+      
     }
   })
 })
