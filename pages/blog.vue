@@ -21,14 +21,14 @@
   </div>
 </template>
 
-<script lang="ts" setup>
+<script lang="js" setup>
+
+import { ref, onMounted } from 'vue'
 const contentQuery = await queryContent('articles').find()
 const line2 = ref(null)
 
 onMounted(() => {
-  const editable = document.getElementsByClassName('.editable')[0]
   line2.value.focus()
-
   line2.value.addEventListener('keydown', (e) => {
     
     if (e.key === 'Enter') {
