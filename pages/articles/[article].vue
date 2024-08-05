@@ -2,8 +2,8 @@
   <div>
     <ContentDoc>
       <template v-slot="{ doc }">
-        <article>
-          <h1 class="titleArticle">{{ doc.title }}</h1>
+        <h1 class="titleArticle">{{ doc.title }}</h1>
+        <article class="article">
           <ContentRenderer class="content" :value="doc" />
         </article>
       </template>
@@ -32,7 +32,12 @@ onMounted(() => {
 
 <style>
 .titleArticle {
+  margin-top: 4vh;
   color: oklch(80.15% 0.15 350.57);
+  font-size: 3em;
+  margin-bottom: 6vh;
+  text-decoration: wavy underline;
+  text-underline-offset: 0.2em;
 }
 .content {
   color: oklch(80.15% 0.15 50);
@@ -51,5 +56,13 @@ p.error {
   display: flex;
   font-size: 1em;
 }
+a {
+  margin-top: 10vh;
+  margin-bottom: 10vh;
+}
+.article {
+  margin-left: 2vw;
+}
+
 
 </style>

@@ -60,6 +60,10 @@ li {
   margin-top: 1vw;
   margin-bottom: 1vw;  
 }
+
+.projectimg {
+  border-radius: 10px;
+}
 li:hover {
   background-color: oklch(80.15% 0.15 100);
   border-radius: 10px;
@@ -102,10 +106,14 @@ a {
   border-bottom: 5px solid oklch(80.15% 0.15 100);
 }
 .bottom {
-  color: oklch(80.15% 0.15 100);
+  color: black;
   margin-top: 1em;
   margin-bottom: 1em;
-  position: absolute;
+  position: fixed;
+  background-color: oklch(80.15% 0.15 100);
+  border-radius: 10px;
+  padding: 10px;
   bottom: 0;
+
 }
 </style>
