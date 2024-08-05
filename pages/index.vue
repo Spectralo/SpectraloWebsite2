@@ -37,8 +37,9 @@ pre {
 
 .terminalcontainer {
   color: oklch(80.15% 0.15 100);
-
 }
+
+
 .editable {
   display: flex;
   flex-direction: row;

@@ -12,11 +12,22 @@
         <p class="error">(How did you go there ?)</p>
       </template>
     </ContentDoc>
+    <p class="bottom">
+      Left arrow to get back
+    </p>
   </div>
 </template>
 
 <script lang="ts" setup>
 const route = useRoute()
+
+onMounted(() => {
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') {
+      navigateTo('/blog/')
+    }
+  })
+})
 </script>
 
 <style>
