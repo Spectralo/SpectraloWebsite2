@@ -1,75 +1,18 @@
-# Nuxt 3 Minimal Starter
+### Spectralo TUI Website
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+This is the repo for my *personal website.*
+You can normally acess it [here](https://spectralo.hackclub.app/) or [here](https://spectralo.me/)
+It's a **cli like** website. Why ? Yes.
 
-## Setup
+## How can you use it ?
 
-Make sure to install the dependencies:
-
-```bash
-# npm
-npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
+If you want to use it, then do whatever you want with it. 
+To test this project locally, clone the repo then run (if you dont have bun, replace it by npm) :
 ```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm run dev
-
-# yarn
-yarn dev
-
-# bun
+bun install
 bun run dev
 ```
+And then go to [localhost:3000](http://localhost:3000/)
 
-## Production
+## Some screenshots
 
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm run build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm run preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
