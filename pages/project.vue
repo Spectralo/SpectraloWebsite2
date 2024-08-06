@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="editable outline" ref="line2">
-      Blog
+      My projects
     </div>
     <ContentNavigation>
       <ul class="gallerylist">
@@ -23,12 +23,13 @@
 <script lang="js" setup>
 
 import { ref, onMounted, compile } from 'vue'
-const contentQuery = await queryContent('articles').find()
+const contentQuery = await queryContent('projects').find()
 const line2 = ref(null)
 
 
 onMounted(() => {
   line2.value.addEventListener('keydown', (e) => {
+
     if (e.key === 'Enter') {
       navigateTo('/articles/' + line2.value.innerText)
     }
@@ -92,6 +93,7 @@ li:hover .projecttitle {
 }
 
 a {
+  text-decoration: none;
   color: oklch(80.15% 0.15 100);
 }
 .editable {

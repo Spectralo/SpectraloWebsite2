@@ -22,19 +22,18 @@
 const route = useRoute()
 
 onMounted(() => {
-  let page = document.getElementsByName('body')
   window.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowLeft') {
-      navigateTo('/blog/')
+      navigateTo('/project/')
     }
   })
   onBeforeUnmount(() => {
       window.removeEventListener('keydown', (e) => {
         if (e.key === 'ArrowLeft') {
-          navigateTo('/blog/')
+          navigateTo('/project/')
         }
       });
-  });
+  });s
 })
 </script>
 

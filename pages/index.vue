@@ -53,8 +53,17 @@ pre {
   flex-direction: row;
   flex-wrap: wrap;
   margin: 0;
-  margin-left: 0.5em;
+  margin-left: 0.2em;
+  width: 80%;
 }
+
+a {
+  color: oklch(80.15% 0.15 100);
+  text-decoration: wavy underline;
+  text-underline-offset: 0.2em;
+  text-decoration-color: oklch(80.15% 0.15 100);
+}
+
 *:focus {
     outline: none;
 }
@@ -137,6 +146,7 @@ onMounted(() => {
     'aboutme' : [aboutme, 'About me', '0','0',0,0],
     'ascii' : [asciiprint, 'Print a beautiful image', '0','0',0,0],
     'blog' : [blog, 'Go to my blog', '0','0',0,0],
+    'projects' : [projects, 'Go to my projects', '0','0',0,0],
   }
 
   function help() {
@@ -157,6 +167,9 @@ onMounted(() => {
 
   function blog() {
     navigateTo('/blog')
+  }
+  function projects() {
+    navigateTo('/project')
   }
   function contact() {
     returnOutput('How to contact me :')

@@ -7,7 +7,7 @@ Trail was the greatest "hacky" event I've participated to.
 At the start it wasnt all pink, I missed my bus and waited 7 hours in an aiport I've never been to, alone.
 But I managed to solve my problems. And it made me learned a lot.
 I loved the concept, I've always loved to talk while walking (This is the time when you have your best ideas -> Hackclub Merch (Soon tm))
-But I wasnt sure if I was able to make it. I'm a hacker. Not a jogger. But at the end I was impressed by myself, we did more than 15km in one day.
+But I wasnt sure if I was abqle to make it. I'm a hacker. Not a jogger. But at the end I was impressed by myself, we did more than 15km in one day.
 
 During the trail I made some friends, thought a lot and saw beautiful landscapes ...
 I made the conclusion writing all about this even would make me happy a day (Maybe in 10 years ...)
