@@ -42,6 +42,11 @@ onMounted(() => {
 .content {
   color: oklch(80.15% 0.15 50);
 }
+
+a.content {
+  color: oklch(80.15% 0.15 50);
+}
+
 h1.error {
   color: oklch(56.27% 0.2252 30);
   justify-content: center;
@@ -62,6 +67,11 @@ a {
 }
 .article {
   margin-left: 2vw;
+}
+h3:has(+ p) {
+  translate: -2vw;
+  margin-top: 2vh;
+  margin-bottom: 2vh;
 }
 
 

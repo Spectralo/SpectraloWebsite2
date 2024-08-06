@@ -53,7 +53,7 @@ onMounted(() => {
   list-style: none;
   padding: 0;
 }
-li {
+li.gallery {
   width: 200px;
   margin-left: 1vw;
   margin-right: 1vw;
@@ -64,7 +64,7 @@ li {
 .projectimg {
   border-radius: 10px;
 }
-li:hover {
+li.gallery:hover {
   background-color: oklch(80.15% 0.15 100);
   border-radius: 10px;
   color: oklch(0% 0.15 100) !important;
