@@ -21,7 +21,16 @@
 <script lang="ts" setup>
 const route = useRoute()
 
+
+
+
 onMounted(() => {
+  let img = document.getElementsByTagName('img')
+  console.log(img)
+  for (let i = 0; i < img.length; i++) {
+     img[i].classList.add('imgcool')
+  }
+
   window.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowLeft') {
       navigateTo('/project/')
@@ -33,7 +42,7 @@ onMounted(() => {
           navigateTo('/project/')
         }
       });
-  });s
+  });
 })
 </script>
 
@@ -79,6 +88,12 @@ h3:has(+ p) {
   translate: -2vw;
   margin-top: 2vh;
   margin-bottom: 2vh;
+}
+.imgcool {
+  max-width: 80%;
+  height: auto;
+  margin-top: 4vh;
+    margin-bottom: 4vh;
 }
 
 
